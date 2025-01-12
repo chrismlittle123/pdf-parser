@@ -1,0 +1,15 @@
+pdfplumber
+ipykernel
+jsonschema
+fitz
+pydantic
+matplotlib
+PyMuPDF
+pytesseract
+Pillow
+mypy
+types-Pillow
+fastapi
+uvicorn
+python-multipart
+httpx

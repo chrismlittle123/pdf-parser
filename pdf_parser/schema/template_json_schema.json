@@ -1,0 +1,131 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "template_name": { "type": "string" },
+          "version": { "type": "string" }
+        },
+        "required": ["template_name", "version"]
+      },
+      "extraction_method": { "type": "string", "enum": ["extraction", "ocr"] },
+      "rules": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "rule_id": { "type": "string" },
+            "type": { "type": "string", "enum": ["form", "table"] },
+            "config": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "properties": {
+                    "field_name": { "type": "string" },
+                    "search_type": { "type": "string", "enum": ["regex", "coordinates"] },
+                    "regex": { "type": ["string", "null"] },
+                    "coordinates": {
+                      "type": "object",
+                      "properties": {
+                        "top_left": {
+                          "type": "object",
+                          "properties": {
+                            "x": { "type": "number" },
+                            "y": { "type": "number" }
+                          },
+                          "required": ["x", "y"]
+                        },
+                        "bottom_right": {
+                          "type": "object",
+                          "properties": {
+                            "x": { "type": "number" },
+                            "y": { "type": "number" }
+                          },
+                          "required": ["x", "y"]
+                        }
+                      },
+                      "required": ["top_left", "bottom_right"]
+                    }
+                  },
+                  "required": ["field_name", "search_type"]
+                },
+                {
+                  "properties": {
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "field_name": { "type": "string" },
+                          "coordinates": {
+                            "type": "object",
+                            "properties": {
+                              "top_left": {
+                                "type": "object",
+                                "properties": {
+                                  "x": { "type": "number" },
+                                  "y": { "type": "number" }
+                                },
+                                "required": ["x", "y"]
+                              },
+                              "bottom_right": {
+                                "type": "object",
+                                "properties": {
+                                  "x": { "type": "number" },
+                                  "y": { "type": "number" }
+                                },
+                                "required": ["x", "y"]
+                              },
+                              "type": { "type": "string" },
+                              "regex": { "type": ["string", "null"] }
+                            },
+                            "required": ["top_left", "bottom_right"]
+                          }
+                        },
+                        "required": ["field_name", "coordinates"]
+                      }
+                    },
+                    "row_delimiter": {
+                      "type": "object",
+                      "properties": {
+                        "type": { "type": "string" },
+                        "field_name": { "type": "string" },
+                        "max_pixel_value": { "type": "number" }
+                      },
+                      "required": ["type", "field_name"]
+                    }
+                  },
+                  "required": ["columns", "row_delimiter"]
+                }
+              ]
+            }
+          },
+          "required": ["rule_id", "type", "config"]
+        }
+      },
+      "pages": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "page_numbers": {
+              "type": "string"
+            },
+            "forms": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "tables": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "ignore": { "type": "boolean" }
+          },
+          "required": ["page_numbers"]
+        }
+      }
+    },
+    "required": ["metadata", "rules", "pages"]
+  }
