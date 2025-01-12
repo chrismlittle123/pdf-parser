@@ -1,14 +1,6 @@
-TO DO:
+## PDF Parser
 
-- Run mypy/ruff again
-- Add unit tests (pytest)
-- Create API tests using jest/typescript
-- Create automated template builder
-- Auto generate project documentation (sphinx?)
-- Set up CI/CD to run tests on each pr or commit.
-- Create a changelog
-- Create performance tests
-- Build diagrams for the project, formal diagrams expressed in code with auto-generation from code
+Parses PDF files and extracts text, tables and other data. Uses templates, with a template identifier built in. Aims to replace the functionality of AWS Textract.
 
 Bugs:
 
