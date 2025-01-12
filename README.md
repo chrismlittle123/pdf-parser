@@ -1,6 +1,6 @@
 ## PDF Parser
 
-Parses PDF files and extracts text, tables and other data. Uses templates, with a template identifier built in. Aims to replace the functionality of AWS Textract.
+Parses PDF files and extracts text, tables and other data. Uses templates, with a template identifier built in. Aims to mimic the functionality of AWS Textract.
 
 Bugs:
 
